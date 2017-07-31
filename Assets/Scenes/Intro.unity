@@ -620,7 +620,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Pickup the power!
+  m_Text: Pickup all the power!
 --- !u!222 &831942961
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1063,8 +1063,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Since you are running out of power for your super secret project, you can
-    use him.
+  m_Text: Since you are running out of power, you can use him.
 --- !u!222 &1965867373
 CanvasRenderer:
   m_ObjectHideFlags: 0
