@@ -868,6 +868,12 @@ public class MapController : MonoBehaviour
             }
         }
 
+        state.InitialPickupCount = new int[_initialPuzzles.Length];
+        for (int i = 0; i < _initialPuzzles.Length; i++)
+        {
+            state.InitialPickupCount[i] = _initialPuzzles[i].PickupCount;
+        }
+
         state.PickupCount = new int[_puzzles.Length][,];
         for (int l = 0; l < _puzzles.Length; l++)
         {
@@ -936,6 +942,11 @@ public class MapController : MonoBehaviour
             }
 
             SetCurrentPuzzle(state.PuzzleLevel, state.PuzzlePosition.r, state.PuzzlePosition.c);
+
+            for (int i = 0; i < _initialPuzzles.Length; i++)
+            {
+                _initialPuzzles[i].PickupCount = state.InitialPickupCount[i];
+            }
 
             for (int l = 0; l < state.PickupCount.Length; l++)
             {
@@ -1269,6 +1280,7 @@ public struct GameState
     public int PuzzleLevel;
     public Position PuzzlePosition;
     public CellState[,] Cells;
+    public int[] InitialPickupCount;
     public int[][,] PickupCount;
 }
 
