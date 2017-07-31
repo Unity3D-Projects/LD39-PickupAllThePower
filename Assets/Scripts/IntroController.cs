@@ -11,6 +11,15 @@ public class IntroController : MonoBehaviour
 
     private bool _playing;
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+            return;
+        }
+    }
+
     public void OnStartClick()
     {
         if (!_playing)

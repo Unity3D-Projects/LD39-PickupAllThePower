@@ -305,7 +305,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: He doesn't know not much, but he knows how to follow instructions.
+  m_Text: He doesn't know much, but he knows how to follow instructions.
 --- !u!222 &608067047
 CanvasRenderer:
   m_ObjectHideFlags: 0

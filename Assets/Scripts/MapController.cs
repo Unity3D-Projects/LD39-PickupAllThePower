@@ -181,6 +181,12 @@ public class MapController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+            return;
+        }
+
         switch (State)
         {
             case MapState.Editing:
