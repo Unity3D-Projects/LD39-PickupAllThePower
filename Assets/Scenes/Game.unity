@@ -2830,7 +2830,7 @@ MonoBehaviour:
     m_MinSize: 1
     m_MaxSize: 150
     m_Alignment: 4
-    m_AlignByGeometry: 0
+    m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
@@ -42239,8 +42239,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 354.1, y: -97.2}
-  m_SizeDelta: {x: 708.1, y: 194.4}
+  m_AnchoredPosition: {x: 384.3, y: -115.7}
+  m_SizeDelta: {x: 768.5, y: 231.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &991823702
 MonoBehaviour:
@@ -74918,7 +74918,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 377.3, y: -120}
+  m_AnchoredPosition: {x: 362, y: -115.75}
   m_SizeDelta: {x: 694.7, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1806870465
@@ -74944,7 +74944,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: b45268f329b1d884bb63ae3b951ef953, type: 3}
     m_FontSize: 36
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 3
     m_MaxSize: 40
     m_Alignment: 0
@@ -74956,13 +74956,15 @@ MonoBehaviour:
   m_Text: 'You must get all the power:
 
 
-    P: Zoom in/Zoom out
+    Space: Send Bob to run.
 
-    R: Rewind
+    P: Zoom in/Zoom out.
 
-    Left click: Place turn (click again to rotate)
+    R: Rewind.
 
-    Right click: Remove turn'
+    Left click: Place turn (click again to rotate).
+
+    Right click: Remove turn.'
 --- !u!222 &1806870466
 CanvasRenderer:
   m_ObjectHideFlags: 0

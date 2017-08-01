@@ -800,9 +800,12 @@ public class MapController : MonoBehaviour
             var pickupPosition = _pickupsInSuperPuzzle[i];
             var cell = Cells[pickupPosition.r, pickupPosition.c];
             var pickup = GetPickup(cell);
-            var pickupController = pickup.GetComponent<PickupController>();
-            pickupController.Visible = true;
-            pickupController.PreviewInSuperPuzzle = true;
+            if (pickup != null)
+            {
+                var pickupController = pickup.GetComponent<PickupController>();
+                pickupController.Visible = true;
+                pickupController.PreviewInSuperPuzzle = true;
+            }
         }
 
         var puzzle = _puzzles[0][0, 0];
