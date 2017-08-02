@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -44,11 +45,9 @@ public class MapController : MonoBehaviour
         new Position(14, 32),
     };
 
-    private string _mapFileName = "map.txt";
-
     void Awake()
     {
-        Cells = MapUtils.LoadMap(_mapFileName, out Rows, out Cols, out StartPosition);
+        Cells = MapUtils.LoadMap(out Rows, out Cols, out StartPosition);
         StartDirection = new Position(0, 1);
 
         _gameStates = new Stack<GameState>();
@@ -1304,23 +1303,50 @@ public static class SoundNames
 
 public static class MapUtils
 {
-    public static Cell[,] LoadMap(string mapFileName, out int rows, out int cols, out Position startPosition)
+    private static string _mapStr = @"21 41
+B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B B
+B 0 0 0 0 B 0 0 0 0 B 0 0 0 0 B 0 0 0 P D 0 0 0 B B B 0 P 0 B B 0 P 0 B 0 B 0 0 B
+B 0 0 0 0 B 0 0 P 0 D 0 P 0 0 B 0 0 0 0 B 0 P 0 0 B 0 0 P 0 D 0 0 0 0 B 0 P 0 P B
+B S 0 P 0 D 0 0 0 0 B 0 0 P 0 B 0 0 0 0 B 0 0 P 0 B 0 0 0 0 B 0 P 0 0 D P 0 0 0 B
+B 0 0 0 0 B 0 0 0 0 B 0 0 0 0 D 0 0 P 0 B B 0 0 0 D 0 0 0 0 B 0 B 0 0 B 0 0 B 0 B
+B B B B B B B B B B B B B B B B B B B B B B B D B B B B D B B B B D B B B D B B B
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 B 0 0 P 0 B 0 0 P 0 B 0 P 0 0 B 0 0 0 0 B
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 B P 0 0 0 D 0 P 0 P D 0 P P 0 D 0 P P B B
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 B 0 0 0 P B 0 0 P 0 B 0 P 0 P B 0 0 0 0 B
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 B 0 P 0 0 B 0 B 0 0 B 0 0 0 0 B 0 P 0 0 B
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 B B D B B B D B B B B B D B B B B B D B B
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 B 0 0 P 0 B 0 P 0 B B 0 0 P 0 D 0 0 P 0 B
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 B 0 P 0 0 D 0 0 P 0 B P 0 P 0 B 0 B 0 P B
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 B B 0 0 P B B P P 0 D 0 0 0 0 B 0 0 0 0 B
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 B 0 0 P 0 B 0 0 0 0 B 0 P 0 B B 0 P P 0 B
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 B B B D B B B D B B B D B B B B D B B B B
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 B 0 P 0 0 B 0 0 P 0 B 0 0 B 0 B 0 0 0 0 B
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 B 0 0 P 0 B P 0 P 0 B 0 P P 0 B P P 0 P B
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 B B 0 P P D 0 0 0 0 B 0 P 0 P D 0 0 0 P B
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 B B B 0 0 B 0 P P 0 D 0 0 P 0 B 0 P 0 0 Q
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 B B B B B B B B B B B B B B B B B B Q B B";
+
+    public static Cell[,] LoadMap(out int rows, out int cols, out Position startPosition)
     {
-        var mapFile = Path.Combine(Application.dataPath, mapFileName);
         startPosition = Position.Zero;
 
-        using (var reader = new StreamReader(mapFile))
+        using (var reader = new StringReader(_mapStr))
         {
-            rows = reader.ReadNextInt();
-            cols = reader.ReadNextInt();
+            var line = reader.ReadLine();
+            var parts = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            rows = int.Parse(parts[0]);
+            cols = int.Parse(parts[1]);
             var cells = new Cell[rows, cols];
 
             for (int r = 0; r < rows; r++)
             {
+                line = reader.ReadLine();
+                parts = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
                 for (int c = 0; c < cols; c++)
                 {
-                    var str = reader.ReadNextString();
-                    cells[r, c] = FromString(str, r, c, rows, cols);
+                    cells[r, c] = FromString(parts[c], r, c, rows, cols);
 
                     if (cells[r, c].Type == CellType.Start)
                     {

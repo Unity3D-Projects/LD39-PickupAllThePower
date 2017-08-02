@@ -34,7 +34,7 @@ public class MapControllerEditor : Editor
 
             int rows, cols;
             Position startPos;
-            var cells = MapUtils.LoadMap(mapFileName, out rows, out cols, out startPos);
+            var cells = MapUtils.LoadMap(out rows, out cols, out startPos);
 
             var floorLayer = _map.CreateLayer("Floor");
             var wallsLayer = _map.CreateLayer("Walls");
