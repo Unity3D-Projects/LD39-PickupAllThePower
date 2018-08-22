@@ -12,3 +12,4 @@ Press P to get an overview of the world.
 You can download it for windows here: 
 https://github.com/acoto87/LD39-PickupAllThePower/blob/master/Pickup%20all%20the%20power%20-%20Windows.zip
 
+Created for Ludum Dare 39.
